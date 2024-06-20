@@ -27,6 +27,24 @@ public class CharacterInfoView : MonoBehaviour
 
         Text_Name.text = character.Name;
         Text_Description.text = character.Description;
+
+        SetSkillUI(character);
     }
 
+    private void SetSkillUI(Character character)
+    {
+        var skillNameList = character.SkillClassNameList;
+        if (skillNameList.Count > 0)
+        {
+            foreach(var skillClassName in skillNameList)
+            {
+                var gObj = Instantiate(Prefab_SkillSlot, Transform_SlotRoot.transform);
+                var skillSlot = gObj.GetComponent<SkillSlotView>();
+                if (skillSlot == null)
+                    continue;
+
+                skillSlot.SetUI(skillClassName);
+            }
+        }
+    }
 }
