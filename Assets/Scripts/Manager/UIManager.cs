@@ -83,6 +83,17 @@ public class UIManager : MonoBehaviour
         return path;
     }
 
+    public void OpenTooltipPopup(string msg)
+    {
+        var gObj = GetCreatedUI(UIType.TooltipPopup);
+        if(gObj != null)
+        {
+            OpenUI(UIType.TooltipPopup, gObj);
+            var tooltipPopup = gObj.GetComponent<TooltipPopup>();
+            tooltipPopup.SetUI(msg);
+        }
+    }
+
     public void CloseSpecificUI(UIType uiType)
     {
         CloseUI(uiType);
