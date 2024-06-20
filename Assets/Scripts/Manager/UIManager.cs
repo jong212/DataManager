@@ -6,6 +6,7 @@ public enum UIType
 {
     SimplePopup,
     MainUI,
+    TooltipPopup,
 }
 
 public class UIManager : MonoBehaviour
@@ -73,6 +74,9 @@ public class UIManager : MonoBehaviour
         {
             case UIType.SimplePopup:
                 path = "Prefabs/UI/SimplePopup";
+                break;
+            case UIType.TooltipPopup:
+                path = "Prefabs/UI/TooltipPopup";
                 break;
         }
 
