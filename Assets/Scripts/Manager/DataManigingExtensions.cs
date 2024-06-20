@@ -39,4 +39,10 @@ public static class DataManigingExtensions
 
         return loadedBuffList[dataClassName];
     }
+
+    public static string GetSkillName(this DataManager manager, string dataClassName)
+    {
+        var skillData = manager.GetSkillData(dataClassName);
+        return (skillData != null) ? skillData.Name : string.Empty;
+    }
 }
