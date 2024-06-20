@@ -17,4 +17,28 @@ public class DataManager : MonoBehaviour
         Inst = this;
         ReadAllDataOnAwake();
     }
+
+    private void ReadAllDataOnAwake()
+    {
+        ReadData(nameof(Character)); // == ReadData("Character")
+        ReadData(nameof(Skill));
+        ReadData(nameof(Buff));
+    }
+
+    private void ReadData(string tableName)
+    {
+        // 이 부분은 충분히 개선될 수 있음
+        switch (tableName)
+        {
+            case "Character":
+                ReadCharacterTable(tableName);
+                break;
+            case "Skill":
+                ReadSkillTable(tableName);
+                break;
+            case "Buff":
+                ReadBuffTable(tableName);
+                break;
+        }
+    }
 }
