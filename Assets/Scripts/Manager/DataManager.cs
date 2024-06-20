@@ -7,9 +7,10 @@ public class DataManager : MonoBehaviour
 {
     public static DataManager Inst { get; private set; }
 
-    Dictionary<int, Character> _loadedCharacterList = new Dictionary<int, Character>();
-    Dictionary<string, Buff> _loadedBuffList = new Dictionary<string, Buff>();
-    Dictionary<string, Skill> _loadedSkillList = new Dictionary<string, Skill>();
+    public Dictionary<int, Character> LoadedCharacterList { get; private set; }
+    public Dictionary<string, Skill> LoadedSkillList { get; private set; }
+    public Dictionary<string, Buff> LoadedBuffList { get; private set; }
+
 
     private readonly string _dataRootPath = "C:/Users/KGA/Desktop/DataParser";
 
@@ -45,6 +46,8 @@ public class DataManager : MonoBehaviour
 
     private void ReadCharacterTable(string tableName)
     {
+        LoadedCharacterList = new Dictionary<int, Character>();
+
         XDocument doc = XDocument.Load($"{_dataRootPath}/{tableName}.xml");
         var dataElements = doc.Descendants("data");
 
@@ -76,12 +79,14 @@ public class DataManager : MonoBehaviour
                 }
             }
 
-            _loadedCharacterList.Add(tempCharacter.DataId, tempCharacter);
+            LoadedCharacterList.Add(tempCharacter.DataId, tempCharacter);
         }
 
     }
     private void ReadSkillTable(string tableName)
     {
+        LoadedSkillList = new Dictionary<string, Skill>();
+
         XDocument doc = XDocument.Load($"{_dataRootPath}/{tableName}.xml");
         var dataElements = doc.Descendants("data");
 
@@ -112,12 +117,14 @@ public class DataManager : MonoBehaviour
                     }
                 }
             }
-            _loadedSkillList.Add(tempSkill.SkillClassName, tempSkill);
+            LoadedSkillList.Add(tempSkill.SkillClassName, tempSkill);
         }
     }
 
     private void ReadBuffTable(string tableName)
     {
+        LoadedBuffList = new Dictionary<string, Buff>();
+
         XDocument doc = XDocument.Load($"{_dataRootPath}/{tableName}.xml");
         var dataElements = doc.Descendants("data");
 
@@ -147,7 +154,7 @@ public class DataManager : MonoBehaviour
                     }
                 }
             }
-            _loadedBuffList.Add(tempBuff.BuffClassName, tempBuff);
+            LoadedBuffList.Add(tempBuff.BuffClassName, tempBuff);
         }
     }
 }
