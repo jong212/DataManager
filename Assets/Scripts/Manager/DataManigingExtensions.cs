@@ -45,4 +45,15 @@ public static class DataManigingExtensions
         var skillData = manager.GetSkillData(dataClassName);
         return (skillData != null) ? skillData.Name : string.Empty;
     }
+
+    public static string GetBuffDescription(this DataManager manager, string dataClassName)
+    {
+        var buffData = manager.GetBuffData(dataClassName);
+        string desc = string.Empty;
+        if(buffData != null)
+        {
+            desc = string.Format(buffData.Description, buffData.BuffValues);
+        }
+        return desc;
+    }
 }
