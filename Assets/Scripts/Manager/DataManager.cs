@@ -6,6 +6,7 @@ using UnityEngine;
 public class DataManager : MonoBehaviour
 {
     public static DataManager Inst { get; private set; }
+
     Dictionary<int, Character> _loadedCharacterList = new Dictionary<int, Character>();
     Dictionary<string, Buff> _loadedBuffList = new Dictionary<string, Buff>();
     Dictionary<string, Skill> _loadedSkillList = new Dictionary<string, Skill>();
@@ -78,5 +79,75 @@ public class DataManager : MonoBehaviour
             _loadedCharacterList.Add(tempCharacter.DataId, tempCharacter);
         }
 
+    }
+    private void ReadSkillTable(string tableName)
+    {
+        XDocument doc = XDocument.Load($"{_dataRootPath}/{tableName}.xml");
+        var dataElements = doc.Descendants("data");
+
+        foreach (var data in dataElements)
+        {
+            var tempSkill = new Skill();
+            tempSkill.SkillClassName = data.Attribute("DataName").Value;
+            tempSkill.Name = data.Attribute(nameof(tempSkill.Name)).Value;
+            tempSkill.Description = data.Attribute(nameof(tempSkill.Description)).Value;
+            tempSkill.BaseDamage = int.Parse(data.Attribute(nameof(tempSkill.BaseDamage)).Value);
+            tempSkill.DamageMultiSkillLevelName = float.Parse(data.Attribute(nameof(tempSkill.DamageMultiSkillLevelName)).Value);
+
+            string skillNameListStr = data.Attribute(nameof(tempSkill.BuffNameList)).Value;
+            if (string.IsNullOrEmpty(skillNameListStr))
+            {
+                skillNameListStr = skillNameListStr.Replace("{", string.Empty);
+                skillNameListStr = skillNameListStr.Replace("}", string.Empty);
+
+                var names = skillNameListStr.Split(',');
+
+                if (names.Length > 0)
+                {
+                    var list = new List<string>();
+                    foreach (var name in names)
+                    {
+                        list.Add(name);
+                        tempSkill.BuffNameList = list;
+                    }
+                }
+            }
+            _loadedSkillList.Add(tempSkill.SkillClassName, tempSkill);
+        }
+    }
+
+    private void ReadBuffTable(string tableName)
+    {
+        XDocument doc = XDocument.Load($"{_dataRootPath}/{tableName}.xml");
+        var dataElements = doc.Descendants("data");
+
+        foreach (var data in dataElements)
+        {
+            var tempBuff = new Buff();
+            tempBuff.BuffClassName = data.Attribute("DataName").Value;
+            tempBuff.Name = data.Attribute(nameof(tempBuff.Name)).Value;
+            tempBuff.Description = data.Attribute(nameof(tempBuff.Description)).Value;
+            tempBuff.BuffTime = int.Parse(data.Attribute(nameof(tempBuff.BuffTime)).Value);
+
+            string skillNameListStr = data.Attribute(nameof(tempBuff.BuffValues)).Value;
+            if (string.IsNullOrEmpty(skillNameListStr))
+            {
+                skillNameListStr = skillNameListStr.Replace("{", string.Empty);
+                skillNameListStr = skillNameListStr.Replace("}", string.Empty);
+
+                var names = skillNameListStr.Split(',');
+
+                if (names.Length > 0)
+                {
+                    var list = new List<float>();
+                    foreach (var name in names)
+                    {
+                        list.Add(float.Parse(name));
+                        tempBuff.BuffValues = list;
+                    }
+                }
+            }
+            _loadedBuffList.Add(tempBuff.BuffClassName, tempBuff);
+        }
     }
 }
