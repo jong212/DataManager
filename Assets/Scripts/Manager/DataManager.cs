@@ -61,22 +61,22 @@ public class DataManager : MonoBehaviour
             tempCharacter.PrefabPath = data.Attribute(nameof(tempCharacter.PrefabPath)).Value;
 
             string skillNameListStr = data.Attribute("SkillNameList").Value;
-            if (string.IsNullOrEmpty(skillNameListStr))
+            if (!string.IsNullOrEmpty(skillNameListStr))
             {
                 skillNameListStr = skillNameListStr.Replace("{", string.Empty);
                 skillNameListStr = skillNameListStr.Replace("}", string.Empty);
 
                 var skillNames = skillNameListStr.Split(',');
 
+                var list = new List<string>();
                 if (skillNames.Length > 0)
                 {
-                    var list = new List<string>();
                     foreach (var name in skillNames)
                     {
                         list.Add(name);
-                        tempCharacter.SkillClassNameList = list;
                     }
                 }
+                tempCharacter.SkillClassNameList = list;
             }
 
             LoadedCharacterList.Add(tempCharacter.DataId, tempCharacter);
@@ -100,22 +100,23 @@ public class DataManager : MonoBehaviour
             tempSkill.DamageMultiSkillLevelName = float.Parse(data.Attribute(nameof(tempSkill.DamageMultiSkillLevelName)).Value);
 
             string skillNameListStr = data.Attribute(nameof(tempSkill.BuffNameList)).Value;
-            if (string.IsNullOrEmpty(skillNameListStr))
+            if (!string.IsNullOrEmpty(skillNameListStr))
             {
                 skillNameListStr = skillNameListStr.Replace("{", string.Empty);
                 skillNameListStr = skillNameListStr.Replace("}", string.Empty);
 
                 var names = skillNameListStr.Split(',');
 
+                var list = new List<string>();
                 if (names.Length > 0)
                 {
-                    var list = new List<string>();
                     foreach (var name in names)
                     {
                         list.Add(name);
-                        tempSkill.BuffNameList = list;
                     }
                 }
+                tempSkill.BuffNameList = list;
+
             }
             LoadedSkillList.Add(tempSkill.SkillClassName, tempSkill);
         }
@@ -136,23 +137,23 @@ public class DataManager : MonoBehaviour
             tempBuff.Description = data.Attribute(nameof(tempBuff.Description)).Value;
             tempBuff.BuffTime = int.Parse(data.Attribute(nameof(tempBuff.BuffTime)).Value);
 
-            string skillNameListStr = data.Attribute(nameof(tempBuff.BuffValues)).Value;
-            if (string.IsNullOrEmpty(skillNameListStr))
+            string buffValuesStr = data.Attribute(nameof(tempBuff.BuffValues)).Value;
+            if (!string.IsNullOrEmpty(buffValuesStr))
             {
-                skillNameListStr = skillNameListStr.Replace("{", string.Empty);
-                skillNameListStr = skillNameListStr.Replace("}", string.Empty);
+                buffValuesStr = buffValuesStr.Replace("{", string.Empty);
+                buffValuesStr = buffValuesStr.Replace("}", string.Empty);
 
-                var names = skillNameListStr.Split(',');
+                var values = buffValuesStr.Split(',');
 
-                if (names.Length > 0)
+                 var list = new List<float>();
+                if (values.Length > 0)
                 {
-                    var list = new List<float>();
-                    foreach (var name in names)
+                    foreach (var buffValue in values)
                     {
-                        list.Add(float.Parse(name));
-                        tempBuff.BuffValues = list;
+                        list.Add(float.Parse(buffValue));
                     }
                 }
+                tempBuff.BuffValues = list;
             }
             LoadedBuffList.Add(tempBuff.BuffClassName, tempBuff);
         }
