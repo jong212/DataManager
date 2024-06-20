@@ -18,6 +18,8 @@ public class SkillSlotView : MonoBehaviour
         if(skillData != null)
         {
             Text_SkillName.text = skillData.Name;
+            var path = $"Textures/SkillIcons/{skillData.IconName}";
+            Image_Icon.sprite = Resources.Load<Sprite>(path);
         }
     }
 

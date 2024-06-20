@@ -20,6 +20,9 @@ public class Skill
     public string Description { get; set; }
     public int BaseDamage { get; set; }
     public float DamageMultiSkillLevelName { get; set; }
+
+    public string IconName { get; set; }
+
     public List<string> BuffNameList { get; set; }
 }
 

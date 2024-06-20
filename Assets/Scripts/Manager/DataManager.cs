@@ -98,6 +98,7 @@ public class DataManager : MonoBehaviour
             tempSkill.Description = data.Attribute(nameof(tempSkill.Description)).Value;
             tempSkill.BaseDamage = int.Parse(data.Attribute(nameof(tempSkill.BaseDamage)).Value);
             tempSkill.DamageMultiSkillLevelName = float.Parse(data.Attribute(nameof(tempSkill.DamageMultiSkillLevelName)).Value);
+            tempSkill.IconName = data.Attribute(nameof(tempSkill.IconName)).Value;
 
             string skillNameListStr = data.Attribute(nameof(tempSkill.BuffNameList)).Value;
             if (!string.IsNullOrEmpty(skillNameListStr))
