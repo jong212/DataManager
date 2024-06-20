@@ -41,4 +41,42 @@ public class DataManager : MonoBehaviour
                 break;
         }
     }
+
+    private void ReadCharacterTable(string tableName)
+    {
+        XDocument doc = XDocument.Load($"{_dataRootPath}/{tableName}.xml");
+        var dataElements = doc.Descendants("data");
+
+        foreach (var data in dataElements)
+        {
+            var tempCharacter = new Character();
+            tempCharacter.DataId = int.Parse(data.Attribute(nameof(tempCharacter.DataId)).Value);
+            tempCharacter.Name = data.Attribute(nameof(tempCharacter.Name)).Value;
+            tempCharacter.Description = data.Attribute(nameof(tempCharacter.Description)).Value;
+            tempCharacter.IconPath = data.Attribute(nameof(tempCharacter.IconPath)).Value;
+            tempCharacter.PrefabPath = data.Attribute(nameof(tempCharacter.PrefabPath)).Value;
+
+            string skillNameListStr = data.Attribute("SkillNameList").Value;
+            if (string.IsNullOrEmpty(skillNameListStr))
+            {
+                skillNameListStr = skillNameListStr.Replace("{", string.Empty);
+                skillNameListStr = skillNameListStr.Replace("}", string.Empty);
+
+                var skillNames = skillNameListStr.Split(',');
+
+                if (skillNames.Length > 0)
+                {
+                    var list = new List<string>();
+                    foreach (var name in skillNames)
+                    {
+                        list.Add(name);
+                        tempCharacter.SkillClassNameList = list;
+                    }
+                }
+            }
+
+            _loadedCharacterList.Add(tempCharacter.DataId, tempCharacter);
+        }
+
+    }
 }
