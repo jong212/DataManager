@@ -23,5 +23,10 @@ public class SkillSlotView : MonoBehaviour
 
     public void OnClick_OpenTooltip()
     {
+        var skillData = DataManager.Inst.GetSkillData(_skillClassName);
+        if (skillData == null)
+            return;
+
+        UIManager.Instance.OpenTooltipPopup(string.Format(skillData.Description, skillData.BaseDamage));
     }
 }
