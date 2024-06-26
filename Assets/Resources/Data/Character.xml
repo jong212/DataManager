@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Character>
+  <dataCategory>
+    <data DataId="1" Name="스톤진" Description="다니텍 사원으로 전략가이다" IconPath="" PrefabPath="" SkillNameList="{NormalAtk_StonJin,Skill_StonJinStorm}" />
+    <data DataId="2" Name="미니멈석" Description="다니텍 사원으로 흑막이다" IconPath="" PrefabPath="" SkillNameList="{NormalAtk_StonJin}" />
+    <data DataId="3" Name="스트롱건" Description="다니텍 사원으로 사원이다" IconPath="" PrefabPath="" SkillNameList="{NormalAtk_StrongGun,Skill_StrongBuff}" />
+    <data DataId="4" Name="큐트댄" Description="다니텍에서 거주하는 생체공학 강아지, 굉장히 못생겼다" IconPath="" PrefabPath="" SkillNameList="" />
+  </dataCategory>
+</Character>

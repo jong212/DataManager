@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<UI>
+  <dataCategory>
+    <data Name="SimplePopup" PrefabPath="Prefabs/UI/SimplePopup" CanvasDepth="0" />
+    <data Name="MainUI" PrefabPath="Prefabs/UI/MainUI" CanvasDepth="90" />
+  </dataCategory>
+</UI>

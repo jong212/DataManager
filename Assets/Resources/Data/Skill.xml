@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Skill>
+  <dataCategory>
+    <data DataName="NormalAtk_StonJin" Name="스톤진어택" Description="강려크한 돌주먹으로 전방펀치해 {0}만큼 피해를 준다." BaseDamage="10" DamageMultiSkillLevelName="0.1" BuffNameList="" IconName="Mini_frame2" />
+    <data DataName="Skill_StonJinStorm" Name="스톤진스톰" Description="주변으로 돌폭풍을 일으켜 {0}만큼 피해를 준다." BaseDamage="20" DamageMultiSkillLevelName="0.5" BuffNameList="" IconName="skill_icon_01" />
+    <data DataName="NormalAtk_StrongGun" Name="스트롱건 슈팅" Description="허약한 근력으로 간신히 총을 발사해 {0}만큼 피해를 준다. 체력이 낮을 수록 공격력 버프를 갖는다." BaseDamage="10" DamageMultiSkillLevelName="0.1" BuffNameList="{Butt_DamageIncHp}" IconName="skill_icon_02" />
+    <data DataName="Skill_StrongBuff" Name="스트롱건 버프" Description="갑자기 각성해 엄청난 공격력을 갖는다." BaseDamage="0" DamageMultiSkillLevelName="0" BuffNameList="{Buff_StrongBuff}" IconName="skill_icon_03" />
+  </dataCategory>
+</Skill>
