@@ -11,9 +11,6 @@ public class DataManager : MonoBehaviour
     public Dictionary<string, Skill> LoadedSkillList { get; private set; }
     public Dictionary<string, Buff> LoadedBuffList { get; private set; }
 
-
-    private readonly string _dataRootPath = "C:/Users/KGA/Desktop/DataParser";
-
     private void Awake()
     {
         Inst = this;
@@ -22,33 +19,42 @@ public class DataManager : MonoBehaviour
 
     private void ReadAllDataOnAwake()
     {
-        ReadData(nameof(Character)); // == ReadData("Character")
-        ReadData(nameof(Skill));
-        ReadData(nameof(Buff));
+        ReadDataTable(nameof(Character)); // == ReadData("Character")
+        ReadDataTable(nameof(Skill));
+        ReadDataTable(nameof(Buff));
     }
 
-    private void ReadData(string tableName)
+    private void ReadDataTable(string tableName)
     {
-        // 이 부분은 충분히 개선될 수 있음
+        var docTextAsset = Resources.Load<TextAsset>($"Data/{tableName}");
+
+        XDocument doc = XDocument.Parse(docTextAsset.text);
+        if (doc == null)
+        {
+            Debug.LogError($"Resource Load Faield!! Data/{tableName}.xml");
+            return;
+        }
+
         switch (tableName)
         {
             case "Character":
-                ReadCharacterTable(tableName);
+                ReadCharacterTable(doc);
                 break;
             case "Skill":
-                ReadSkillTable(tableName);
+                ReadSkillTable(doc);
                 break;
             case "Buff":
-                ReadBuffTable(tableName);
+                ReadBuffTable(doc);
                 break;
         }
+
     }
 
-    private void ReadCharacterTable(string tableName)
+
+    private void ReadCharacterTable(XDocument doc)
     {
         LoadedCharacterList = new Dictionary<int, Character>();
-
-        XDocument doc = XDocument.Load($"{_dataRootPath}/{tableName}.xml");
+        
         var dataElements = doc.Descendants("data");
 
         foreach (var data in dataElements)
@@ -83,11 +89,10 @@ public class DataManager : MonoBehaviour
         }
 
     }
-    private void ReadSkillTable(string tableName)
+    private void ReadSkillTable(XDocument doc)
     {
         LoadedSkillList = new Dictionary<string, Skill>();
 
-        XDocument doc = XDocument.Load($"{_dataRootPath}/{tableName}.xml");
         var dataElements = doc.Descendants("data");
 
         foreach (var data in dataElements)
@@ -123,11 +128,10 @@ public class DataManager : MonoBehaviour
         }
     }
 
-    private void ReadBuffTable(string tableName)
+    private void ReadBuffTable(XDocument doc)
     {
         LoadedBuffList = new Dictionary<string, Buff>();
 
-        XDocument doc = XDocument.Load($"{_dataRootPath}/{tableName}.xml");
         var dataElements = doc.Descendants("data");
 
         foreach (var data in dataElements)
