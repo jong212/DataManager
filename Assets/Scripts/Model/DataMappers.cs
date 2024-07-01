@@ -35,7 +35,7 @@ public class Buff
     public List<float> BuffValues { get; set; }
 }
 
-public class AnimationEvent
+public class ModelAnimationEvent
 {
     public string ClassName { get; set; }
     public string AnimationGroup { get; set; }

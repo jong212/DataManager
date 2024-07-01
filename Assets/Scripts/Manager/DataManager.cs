@@ -10,7 +10,7 @@ public class DataManager : MonoBehaviour
     public Dictionary<int, Character> LoadedCharacterList { get; private set; }
     public Dictionary<string, Skill> LoadedSkillList { get; private set; }
     public Dictionary<string, Buff> LoadedBuffList { get; private set; }
-    public Dictionary<string, AnimationEvent> LoadedAnimEventList { get; private set; }
+    public Dictionary<string, ModelAnimationEvent> LoadedAnimEventList { get; private set; }
 
     private void Awake()
     {
@@ -171,13 +171,13 @@ public class DataManager : MonoBehaviour
 
     public void ReadAnimationEventTable(XDocument doc)
     {
-        LoadedAnimEventList = new Dictionary<string, AnimationEvent>();
+        LoadedAnimEventList = new Dictionary<string, ModelAnimationEvent>();
 
         var dataElements = doc.Descendants("data");
 
         foreach (var data in dataElements)
         {
-            var tempAnimEvent = new AnimationEvent();
+            var tempAnimEvent = new ModelAnimationEvent();
             tempAnimEvent.ClassName = data.Attribute(nameof(tempAnimEvent.ClassName)).Value;
             tempAnimEvent.AnimationGroup = data.Attribute(nameof(tempAnimEvent.AnimationGroup)).Value;
             tempAnimEvent.ClipName = data.Attribute(nameof(tempAnimEvent.ClipName)).Value;
