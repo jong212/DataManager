@@ -34,3 +34,12 @@ public class Buff
     public int BuffTime { get; set; }
     public List<float> BuffValues { get; set; }
 }
+
+public class AnimationEvent
+{
+    public string ClassName { get; set; }
+    public string AnimationGroup { get; set; }
+    public string ClipName { get; set; }
+    public string EventName { get; set; }
+    public float EventStartTime { get; set; }
+}

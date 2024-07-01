@@ -10,6 +10,7 @@ public class DataManager : MonoBehaviour
     public Dictionary<int, Character> LoadedCharacterList { get; private set; }
     public Dictionary<string, Skill> LoadedSkillList { get; private set; }
     public Dictionary<string, Buff> LoadedBuffList { get; private set; }
+    public Dictionary<string, AnimationEvent> LoadedAnimEventList { get; private set; }
 
     private void Awake()
     {
@@ -22,6 +23,7 @@ public class DataManager : MonoBehaviour
         ReadDataTable(nameof(Character)); // == ReadData("Character")
         ReadDataTable(nameof(Skill));
         ReadDataTable(nameof(Buff));
+        ReadDataTable(nameof(AnimationEvent));
     }
 
     private void ReadDataTable(string tableName)
@@ -45,6 +47,9 @@ public class DataManager : MonoBehaviour
                 break;
             case "Buff":
                 ReadBuffTable(doc);
+                break;
+            case nameof(AnimationEvent):
+                ReadAnimationEventTable(doc);
                 break;
         }
 
@@ -161,6 +166,25 @@ public class DataManager : MonoBehaviour
                 tempBuff.BuffValues = list;
             }
             LoadedBuffList.Add(tempBuff.BuffClassName, tempBuff);
+        }
+    }
+
+    public void ReadAnimationEventTable(XDocument doc)
+    {
+        LoadedAnimEventList = new Dictionary<string, AnimationEvent>();
+
+        var dataElements = doc.Descendants("data");
+
+        foreach (var data in dataElements)
+        {
+            var tempAnimEvent = new AnimationEvent();
+            tempAnimEvent.ClassName = data.Attribute(nameof(tempAnimEvent.ClassName)).Value;
+            tempAnimEvent.AnimationGroup = data.Attribute(nameof(tempAnimEvent.AnimationGroup)).Value;
+            tempAnimEvent.ClipName = data.Attribute(nameof(tempAnimEvent.ClipName)).Value;
+            tempAnimEvent.EventName = data.Attribute(nameof(tempAnimEvent.EventName)).Value;
+            tempAnimEvent.EventStartTime = float.Parse(data.Attribute(nameof(tempAnimEvent.EventStartTime)).Value);
+
+            LoadedAnimEventList.Add(tempAnimEvent.ClassName, tempAnimEvent);
         }
     }
 }
