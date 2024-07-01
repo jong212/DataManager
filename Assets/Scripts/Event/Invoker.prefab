@@ -1056,7 +1056,6 @@ GameObject:
   m_Component:
   - component: {fileID: 464080353816025517}
   - component: {fileID: 464080353823815235}
-  - component: {fileID: 6617987431207139566}
   m_Layer: 0
   m_Name: DogPBR
   m_TagString: Untagged
@@ -1102,19 +1101,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &6617987431207139566
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 464080353816380813}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0344e97f3a148d44b99e6258a7c433b2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Animator_Origin: {fileID: 464080353823815235}
 --- !u!1 &464080353816380815
 GameObject:
   m_ObjectHideFlags: 0
@@ -2622,6 +2608,7 @@ GameObject:
   - component: {fileID: 2019158908358463608}
   - component: {fileID: 7328064231869829122}
   - component: {fileID: 7718550088516915477}
+  - component: {fileID: 6357248519979120392}
   m_Layer: 0
   m_Name: Invoker
   m_TagString: Untagged
@@ -2697,6 +2684,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Animator_Player: {fileID: 464080353823815235}
+--- !u!114 &6357248519979120392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5770312518351559975}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0344e97f3a148d44b99e6258a7c433b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Animator_Origin: {fileID: 464080353823815235}
+  _animationEventGroupName: Character
 --- !u!1 &6292899640957552413
 GameObject:
   m_ObjectHideFlags: 0
