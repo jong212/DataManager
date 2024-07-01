@@ -5,9 +5,8 @@ using UnityEngine;
 public class CharacterAnimationEventFitter : MonoBehaviour
 {
     [SerializeField] Animator Animator_Origin;
-
-    private string _temporalClipName = "Dizzy";
-
+    [SerializeField] string _animationEventGroupName;
+   
     private void Start()
     {
         SetAnimationEvent();
@@ -15,9 +14,30 @@ public class CharacterAnimationEventFitter : MonoBehaviour
 
     private void SetAnimationEvent()
     {
-        string eventName = "OnAnimationEventTest";
+        if (string.IsNullOrEmpty(_animationEventGroupName))
+            return;
 
-        var clip = LoadClipByName(_temporalClipName);
+        if (DataManager.Inst.LoadedAnimEventList?.Count == 0)
+            return;
+
+        if (false == DataManager.Inst.LoadedAnimEventList.ContainsKey(_animationEventGroupName))
+            return;
+
+        var animEventList = DataManager.Inst.LoadedAnimEventList[_animationEventGroupName];
+
+        foreach(var animEventData in animEventList)
+        {
+            AddAnimationEvent(
+                animEventData.EventName,
+                animEventData.ClipName,
+                animEventData.EventStartTime
+                );
+        }
+    }
+
+    private void AddAnimationEvent(string eventName, string clipName, float eventStartTime)
+    {
+        var clip = LoadClipByName(clipName);
         if (clip != null)
         {
             // 반드시 애니메이터와 이벤트 컴포넌트가 동일한 GameObject에 있어야한다.
