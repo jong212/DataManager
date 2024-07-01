@@ -22,4 +22,17 @@ public class CharacterAnimationEventFitter : MonoBehaviour
 
         return clip;
     }
+
+    private void AddEventOnClip(string eventName, AnimationClip clip)
+    {
+        float eventTime = 0.05f;
+
+        AnimationEvent animEvent = new AnimationEvent();
+        animEvent.objectReferenceParameter = this;
+        animEvent.time = eventTime;
+        animEvent.functionName = eventName;
+        animEvent.messageOptions = SendMessageOptions.DontRequireReceiver;
+
+        clip.AddEvent(animEvent);
+    }
 }
