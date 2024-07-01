@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <AnimationEvent>
   <dataCategory>
-    <data ClassName="Character_Dizzy" AnimationGroup="Character" ClipName="Dizzy" EventName="OnAnimationEventTest" EventStartTime="0.05" />
+    <data ClassName="Character_Dizzy" AnimationGroup="Character" ClipName="Dizzy" EventName="OnAnimationEventTest" EventStartTime="0.2" />
   </dataCategory>
 </AnimationEvent>

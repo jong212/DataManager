@@ -45,7 +45,7 @@ public class CharacterAnimationEventFitter : MonoBehaviour
             var animEvents = Animator_Origin.gameObject.AddComponent<CharacterAnimEvents>();
             if (animEvents != null)
             {
-                AddEventOnClip(eventName, clip);
+                AddEventOnClip(eventName, clip, eventStartTime);
             }
         }
     }
@@ -65,9 +65,9 @@ public class CharacterAnimationEventFitter : MonoBehaviour
         return clip;
     }
 
-    private void AddEventOnClip(string eventName, AnimationClip clip)
+    private void AddEventOnClip(string eventName, AnimationClip clip, float eventStartTime)
     {
-        float eventTime = 0.05f;
+        float eventTime = eventStartTime;
 
         AnimationEvent animEvent = new AnimationEvent();
         animEvent.objectReferenceParameter = this;
