@@ -8,6 +8,28 @@ public class CharacterAnimationEventFitter : MonoBehaviour
 
     private string _temporalClipName = "Dizzy";
 
+    private void Start()
+    {
+        SetAnimationEvent();
+    }
+
+    private void SetAnimationEvent()
+    {
+        string eventName = "OnAnimationEventTest";
+
+        var clip = LoadClipByName(_temporalClipName);
+        if (clip != null)
+        {
+            // 반드시 애니메이터와 이벤트 컴포넌트가 동일한 GameObject에 있어야한다.
+            // 자식이나 부모에 있으면 이벤트 컴포넌트 내의 함수들이 불려지지 않는다.
+            var animEvents = Animator_Origin.gameObject.AddComponent<CharacterAnimEvents>();
+            if (animEvents != null)
+            {
+                AddEventOnClip(eventName, clip);
+            }
+        }
+    }
+
     private AnimationClip LoadClipByName(string name)
     {
         AnimationClip clip = null;
